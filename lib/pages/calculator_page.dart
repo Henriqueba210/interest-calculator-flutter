@@ -26,96 +26,104 @@ class _CalculatorPageState extends State<CalculatorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              _buildTitle('Informações do boleto'),
-              _buildMoneyInputField(
-                'Valor do boleto',
-                controller: _controller.moneyController,
-                onSaved: (value) {
-                  _controller.paymentSlip.money =
-                      _controller.moneyController.numberValue;
-                },
-              ),
-              _buildDateInputField(
-                'Data de vencimento',
-                onSaved: (date) {
-                  _controller.paymentSlip.dueDate = date;
-                },
-              ),
-              _buildDateInputField(
-                'Data de pagamento',
-                onSaved: (date) {
-                  _controller.paymentSlip.payDate = date;
-                },
-              ),
-              _buildTitle('Multa'),
-              _buildMoneyInputField(
-                'Valor da multa',
-                controller: _controller.feeController,
-                onSaved: (value) {
-                  _controller.paymentSlip.feeValue =
-                      _controller.feeController.numberValue;
-                },
-              ),
-              _buildRateRadioButton(
-                context,
-                onChanged: (label) {
-                  print(label);
-                  _controller.paymentSlip.feeType = label;
-                },
-              ),
-              _buildTitle('Juros'),
-              _buildMoneyInputField(
-                'Valor do juros',
-                controller: _controller.interestController,
-                onSaved: (value) {
-                  _controller.paymentSlip.interestValue =
-                      _controller.interestController.numberValue;
-                },
-              ),
-              _buildRateRadioButton(
-                context,
-                onChanged: (label) {
-                  print(label);
-                  _controller.paymentSlip.interestType = label;
-                },
-              ),
-              _buildPeriodRadioButton(
-                context,
-                onChanged: (label) {
-                  print(label);
-                  _controller.paymentSlip.interestPeriod = label;
-                },
-              ),
-              _buildRoundedButton(
-                context,
-                label: 'CALCULAR',
-                padding: EdgeInsets.only(top: 32.0),
-                onTap: () {
-                  if (_formKey.currentState.validate()) {
-                    _formKey.currentState.save();
-                    var result = _controller.calculate();
-                    _showResultDialog(result);
-                  }
-                },
-              ),
-              _buildRoundedButton(
-                context,
-                label: 'LIMPAR',
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                onTap: () {
-                  setState(() {
-                    _controller.clear();
-                  });
-                },
-              )
-            ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [Colors.yellow, Colors.red]),
+        ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                _buildTitle('Informações do boleto'),
+                _buildMoneyInputField(
+                  'Valor do boleto',
+                  controller: _controller.moneyController,
+                  onSaved: (value) {
+                    _controller.paymentSlip.money =
+                        _controller.moneyController.numberValue;
+                  },
+                ),
+                _buildDateInputField(
+                  'Data de vencimento',
+                  onSaved: (date) {
+                    _controller.paymentSlip.dueDate = date;
+                  },
+                ),
+                _buildDateInputField(
+                  'Data de pagamento',
+                  onSaved: (date) {
+                    _controller.paymentSlip.payDate = date;
+                  },
+                ),
+                _buildTitle('Multa'),
+                _buildMoneyInputField(
+                  'Valor da multa',
+                  controller: _controller.feeController,
+                  onSaved: (value) {
+                    _controller.paymentSlip.feeValue =
+                        _controller.feeController.numberValue;
+                  },
+                ),
+                _buildRateRadioButton(
+                  context,
+                  onChanged: (label) {
+                    print(label);
+                    _controller.paymentSlip.feeType = label;
+                  },
+                ),
+                _buildTitle('Juros'),
+                _buildMoneyInputField(
+                  'Valor do juros',
+                  controller: _controller.interestController,
+                  onSaved: (value) {
+                    _controller.paymentSlip.interestValue =
+                        _controller.interestController.numberValue;
+                  },
+                ),
+                _buildRateRadioButton(
+                  context,
+                  onChanged: (label) {
+                    print(label);
+                    _controller.paymentSlip.interestType = label;
+                  },
+                ),
+                _buildPeriodRadioButton(
+                  context,
+                  onChanged: (label) {
+                    print(label);
+                    _controller.paymentSlip.interestPeriod = label;
+                  },
+                ),
+                _buildRoundedButton(
+                  context,
+                  label: 'CALCULAR',
+                  padding: EdgeInsets.only(top: 32.0),
+                  onTap: () {
+                    if (_formKey.currentState.validate()) {
+                      _formKey.currentState.save();
+                      var result = _controller.calculate();
+                      _showResultDialog(result);
+                    }
+                  },
+                ),
+                _buildRoundedButton(
+                  context,
+                  label: 'LIMPAR',
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  onTap: () {
+                    setState(() {
+                      _controller.clear();
+                    });
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -258,13 +266,17 @@ class _CalculatorPageState extends State<CalculatorPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              _buildResultDialogRow('Atraso', '${result.days} ${_controller.paymentSlip.interestPeriod.toLowerCase()}(s)'),
-              _buildResultDialogRow('Juros', 'R\$ ${_moneyFormat.format(result.interest)}'),
-              _buildResultDialogRow('Multa', 'R\$ ${_moneyFormat.format(result.fee)}'),
+              _buildResultDialogRow('Atraso',
+                  '${result.days} ${_controller.paymentSlip.interestPeriod.toLowerCase()}(s)'),
+              _buildResultDialogRow(
+                  'Juros', 'R\$ ${_moneyFormat.format(result.interest)}'),
+              _buildResultDialogRow(
+                  'Multa', 'R\$ ${_moneyFormat.format(result.fee)}'),
               SizedBox(height: 16),
               Divider(height: 0.1),
               SizedBox(height: 16),
-              _buildResultDialogRow('Total', 'R\$ ${_moneyFormat.format(result.value)}'),
+              _buildResultDialogRow(
+                  'Total', 'R\$ ${_moneyFormat.format(result.value)}'),
             ],
           ),
         );
