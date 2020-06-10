@@ -19,13 +19,14 @@ class _CalculatorPageState extends State<CalculatorPage> {
   final _dateFormat = DateFormat('dd/MM/yyyy');
   final _moneyFormat = NumberFormat("#,##0.00", "pt_BR");
 
+
   // Lógica de negócio do aplicativo
   Controller _controller = Controller();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -130,7 +131,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
     );
   }
 
-  _buildAppBar() {
+  _buildAppBar(BuildContext context) {
     return AppBar(
       title: Text('Calculadora de Juros'),
       actions: <Widget>[
@@ -140,10 +141,14 @@ class _CalculatorPageState extends State<CalculatorPage> {
         ),
         IconButton(
           icon: Icon(Icons.info),
-          onPressed: () {},
+          onPressed: () {_buildShowDialog(context);},
         ),
       ],
     );
+  }
+
+  _buildShowDialog(BuildContext context){
+    showAboutDialog(context: context,children: [Text('Feito por Henrique Barros de Almeida')]);
   }
 
   _roundedInputDecoration() {
