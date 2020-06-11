@@ -24,7 +24,7 @@ Tutorial de criação deste app: [clique aqui](https://medium.com/flutter-comuni
 *   [x] Adicionar um background gradiente ([tutorial](https://alligator.io/flutter/flutter-gradient/) e [uiGradients](https://uigradients.com/));
 *   [x] Adicionar um botão na IconButton na AppBar para exibir informações do aplicativo utilizando a função [showAboutDialog](https://api.flutter.dev/flutter/material/showAboutDialog.html);
 *   [x] Criar um IconButton na AppBar para alternar entre os temas Light/dark (use o [plugin dynamic_theme](https://pub.dev/packages/dynamic_theme) e para entender mais sobre os parâmetros do tema use o [panache](https://rxlabz.github.io/panache/#/));
-*   [ ] Implementar a função que limpa (clear) a tela na classe Controller.
+*   [x] Implementar a função que limpa (clear) a tela na classe Controller.
 
 ## Licença
 
