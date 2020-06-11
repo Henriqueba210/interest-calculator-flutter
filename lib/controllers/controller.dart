@@ -73,6 +73,15 @@ class Controller {
   }
 
   // Função para apagar (reiniciar) as informações da tela
-  // Esta função faz parte do desafio, por isso ela não esta codificada
-  void clear() {}
+  void clear() {
+    moneyController.text = "0,00";
+    feeController.text = "0,00";
+    interestController.text = "0,00";
+    paymentSlip.dueDate = DateTime.now();
+    paymentSlip.payDate = DateTime.now();
+    paymentSlip.money = 0.00;
+    paymentSlip.feeType = Constantes.rateLabels[0];
+    paymentSlip.interestType = Constantes.rateLabels[0];
+    paymentSlip.interestPeriod = Constantes.periodLabels[0];
+  }
 }
